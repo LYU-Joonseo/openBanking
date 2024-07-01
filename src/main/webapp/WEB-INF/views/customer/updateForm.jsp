@@ -1,28 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="graduation.project.vo.CustomerVO" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회원정보 수정</title>
+<title>회원정보 수정</title>
 </head>
 <body> 
-	 <div style="padding: 20px;">
-        
-        <h3>회원정보 수정</h3>
-        <hr>
-        <form action="@{/member/update}" method="post">
-        <!-- 아이디, 비밀번호, 이름, 전화번호, 주민번호 -->
-	        아이디: <input type="text" name="id" th:value="${user.getId}" readonly /> <br />
-	        비밀번호 : <input type="text" name="pwd" th:value="${user.getPwd}" /> <br />
-	        이름: <input type="text" name="name" th:value="${user.getName}" /> <br />
-	        전화번호 : <input type="text" name="phone" th:value="${user.getPhone}" /> <br />
-	        주민번호 : <input type="text" name="register_num" th:value="${user.getRegister_num}" /> <br />
-	        <input type="submit" value="수정" />
-		</form>
+	<div style="padding: 20px;" align="center">
+		<h3>회원정보 수정</h3>
+		<hr>
+		<form:form id="updateForm" method="post" modelAttribute="customerVO" autocomplete="off">
+			<table border="1" style="width: 30%">
+				<tr>
+					<th></th>
+					<td align="right"><small class="txt">* 표시는 필수 항목입니다.</small></td>
+				</tr>
+				<tr>
+					<th width="25%">아이디*</th>
+					<td>
+						<form:input path="id" readonly="true"/>
+					</td>
+				</tr>
+				<tr>
+					<th width="25%">현재 비밀번호*</th>
+					<td>
+						<form:input path="password" />
+						<form:errors path="pwd" class="error"/>
+					</td>
+				</tr>
+				<tr>
+					<th width="25%">변경 비밀번호*</th>
+					<td>
+						<form:input path="password" />
+						<form:errors path="pwd" class="error"/>
+					</td>
+				</tr>
+				<tr>
+		            <th width="30%">비밀번호 확인*</th>
+		            <td>
+		                <input type="password" id="confirmPwd"/>
+		                <span id="passwordStatus"></span>
+		            </td>
+		        </tr>
+				<tr>
+					<th width="25%">이름*</th>
+					<td>
+						<form:input path="name"/>
+						<form:errors path="name" class="error"/>
+					</td>
+				</tr>
+				<tr>
+					<th width="25%">전화번호*</th>
+					<td>
+						<form:input path="phone"/>
+						<form:errors path="phone" class="error"/>
+					</td>
+				</tr>
+				<tr>
+					<th width="25%">주민번호*</th>
+					<td>
+						<form:input path="register_num" readonly="true"/>
+					</td>
+				</tr>
+			</table>
+			<button id="signupBtn" type="submit">가입</button><br>
+		</form:form>
+		<br>
+		<button id="mainBtn">메인화면으로</button>
 	</div>
 </body>
 </html>
